@@ -7,9 +7,9 @@ def generate_all_posts(raw_news):
     if not api_key:
         return "Error: I can't find your Google API Key!"
     
-    # Connect to the AI "Brain"
+    # Connect to the AI "Brain" (Updated to 1.5 Flash)
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    model = genai.GenerativeModel("gemini-1.5-flash")
     
     # Instructions for the AI to be your Ghostwriter
     prompt = f"""
