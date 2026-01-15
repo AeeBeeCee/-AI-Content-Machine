@@ -7,8 +7,8 @@ def fetch_news(topic):
         return "Error: I can't find your Google API Key!"
     
     genai.configure(api_key=api_key)
-    # We are using "gemini-pro" - this is a very stable name
-    model = genai.GenerativeModel("gemini-pro")
+    # Using the most stable name: gemini-1.5-flash-latest
+    model = genai.GenerativeModel("gemini-1.5-flash-latest")
     
     prompt = f"Find 3 recent and trending news stories about {topic}. For each story, give me a catchy title and a short summary."
     
