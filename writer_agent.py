@@ -7,19 +7,16 @@ def generate_all_posts(raw_news):
         return "Error: I can't find your Google API Key!"
     
     genai.configure(api_key=api_key)
-    # Using the most stable name: gemini-1.5-flash-latest
-    model = genai.GenerativeModel("gemini-1.5-flash-latest")
     
-    prompt = f"""
-    You are a professional social media ghostwriter. 
-    Based on the news below, write 3 different posts:
-    1. A professional LinkedIn post (with hashtags).
-    2. A punchy X (Twitter) post (under 280 characters).
-    3. A friendly Facebook post.
-    
-    Here is the news:
-    {raw_news}
-    """
+    # MAGIC TRICK: Automatically find a working model
+    model_name = "gemini-1.5-flash"
+    for m in genai.list_models():
+        if 'generateContent' in m.supported_generation_methods:
+            model_name = m.name
+            break
+            
+    model = genai.GenerativeModel(model_name)
+    prompt = f"Based on the news below, write a LinkedIn post, an X post, and a Facebook post:\n\n{raw_news}"
     
     try:
         response = model.generate_content(prompt)
