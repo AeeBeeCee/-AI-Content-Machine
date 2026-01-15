@@ -2,16 +2,14 @@ import os
 import google.generativeai as genai
 
 def generate_all_posts(raw_news):
-    # Again, we tell the machine to use your secret API Key
     api_key = os.environ.get("GOOGLE_API_KEY")
     if not api_key:
         return "Error: I can't find your Google API Key!"
     
-    # Connect to the AI "Brain" (Updated to 1.5 Flash)
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    # Using "gemini-pro" here as well
+    model = genai.GenerativeModel("gemini-pro")
     
-    # Instructions for the AI to be your Ghostwriter
     prompt = f"""
     You are a professional social media ghostwriter. 
     Based on the news below, write 3 different posts:
