@@ -7,8 +7,8 @@ def generate_all_posts(raw_news):
         return "Error: I can't find your Google API Key!"
     
     genai.configure(api_key=api_key)
-    # Using "gemini-pro" here as well
-    model = genai.GenerativeModel("gemini-pro")
+    # Using the most stable name: gemini-1.5-flash-latest
+    model = genai.GenerativeModel("gemini-1.5-flash-latest")
     
     prompt = f"""
     You are a professional social media ghostwriter. 
