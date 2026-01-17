@@ -17,15 +17,16 @@ def generate_everything(topic, tone):
             
     model = genai.GenerativeModel(model_name)
     
-    # ONE BIG PROMPT: Find news + Analyze + Write
+    # NEW PROMPT: Added Reliability Check and Calendar Planning
     prompt = f"""
-    You are an expert researcher and social media ghostwriter.
+    You are an expert researcher, fact-checker, and social media ghostwriter.
     
     TASK:
-    1. Find 3 recent and trending news stories about the topic: {topic}.
-    2. For each story, explain the "So What?" (why it matters to professionals).
-    3. Extract a "Power Quote" or "Hook" from the news.
-    4. Write 3 social media posts (LinkedIn, X, Facebook) in a {tone} tone.
+    1. RESEARCH: Find 3 recent news stories about: {topic}.
+    2. RELIABILITY CHECK: For each story, give a "Reliability Score" (1-10) and a quick reason why (e.g., "From a major tech outlet" or "Sounds like speculative hype").
+    3. ANALYSIS: Explain the "So What?" for professionals.
+    4. CONTENT: Write a LinkedIn, X, and Facebook post in a {tone} tone.
+    5. CALENDAR: Suggest which day of the week (Monday-Friday) each story would be best to post.
     
     TONE GUIDE:
     - Naija Centric: Use Nigerian English/Pidgin flair and local context.
@@ -33,7 +34,7 @@ def generate_everything(topic, tone):
     - Humorous: Witty and lighthearted.
     - Professional: Polished and business-ready.
     
-    Please format the output clearly so it's easy to read.
+    Please format the output with clear headings like '🛡️ RELIABILITY CHECK' and '📅 SUGGESTED SCHEDULE'.
     """
     
     try:
