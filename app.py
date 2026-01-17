@@ -1,11 +1,12 @@
 import os
 import streamlit as st
-from writer_agent import generate_everything # We only need this one now!
+from writer_agent import generate_everything
 
-st.set_page_config(page_title="AI Content Machine Pro", layout="wide")
+st.set_page_config(page_title="AI Content Machine Pro v2", layout="wide")
 
-st.title("🤖 AI Content Machine Pro")
-st.subheader("Your Personal Digital Ghostwriter")
+# This new title will help us see if the update worked!
+st.title("🤖 AI Content Machine Pro v2.0")
+st.subheader("Your Personal Digital Ghostwriter with Reliability Check")
 
 st.divider()
 st.info("🔑 Step 1: Enter your Google API Key.")
@@ -27,11 +28,11 @@ if api_key_input:
                             ["Professional", "Humorous", "Authoritative", "Naija Centric"])
 
     if st.button("🚀 Generate My Content"):
-        with st.spinner("Researching, Analyzing, and Writing..."):
-            # We do everything in ONE call now!
+        with st.spinner("Researching, Fact-Checking, and Writing..."):
+            # This calls the new brain in writer_agent.py
             final_output = generate_everything(topic, tone)
             
-            st.subheader("📝 Your Social Media Drafts & Analysis")
+            st.subheader("📝 Your Social Media Drafts & Reliability Report")
             st.write(final_output)
 else:
     st.warning("Waiting for your API Key...")
