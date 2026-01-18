@@ -2,75 +2,103 @@ import os
 import streamlit as st
 from writer_agent import generate_everything
 
-# 1. Page Configuration & Styling
-st.set_page_config(page_title="AI Content Machine Pro v2", layout="wide")
+# 1. Page Configuration
+st.set_page_config(page_title="AI Content Machine Pro", layout="wide")
 
-# This part adds custom "paint" to your website
+# 2. Premium Styling (Midnight & Gold)
 st.markdown("""
     <style>
-    .main {
-        background-color: #f5f7f9;
+    /* Main background */
+    .stApp {
+        background-color: #0e1117;
+        color: #ffffff;
     }
-    .stButton>button {
-        width: 100%;
-        border-radius: 10px;
-        height: 3em;
-        background-color: #007bff;
-        color: white;
-        font-weight: bold;
+    
+    /* Custom Font and Headers */
+    h1, h2, h3 {
+        font-family: 'Inter', sans-serif;
+        color: #ffd700 !important;
     }
-    .stTextInput>div>div>input {
-        border-radius: 10px;
-    }
+    
+    /* The Content Card */
     .report-card {
-        background-color: white;
-        padding: 20px;
-        border-radius: 15px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        margin-bottom: 20px;
+        background-color: #ffffff;
+        color: #1c1e21;
+        padding: 30px;
+        border-radius: 20px;
+        border-left: 8px solid #ffd700;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        margin-top: 25px;
+        line-height: 1.6;
+    }
+    
+    /* The Big Button */
+    .stButton>button {
+        background-color: #ffd700 !important;
+        color: #0e1117 !important;
+        border: none !important;
+        border-radius: 12px !important;
+        padding: 15px !important;
+        font-size: 18px !important;
+        font-weight: bold !important;
+        transition: 0.3s;
+    }
+    
+    .stButton>button:hover {
+        background-color: #e6c200 !important;
+        transform: translateY(-2px);
+    }
+
+    /* Input boxes */
+    .stTextInput>div>div>input {
+        background-color: #1c1e21 !important;
+        color: white !important;
+        border: 1px solid #3d444d !important;
+        border-radius: 10px !important;
     }
     </style>
-    """, unsafe_allow_stdio=True)
+    """, unsafe_allow_html=True)
 
-# 2. Header Section
+# 3. Header Section
+st.title("🛡️ AI Content Machine Pro")
+st.markdown("#### *Elevate Your Professional Presence with AI-Powered Strategy*")
+st.divider()
+
+# 4. Step 1: Security Access
 with st.container():
-    st.title("🤖 AI Content Machine Pro v2.0")
-    st.markdown("### *Your Personal Digital Ghostwriter & Strategic Partner*")
-    st.divider()
-
-# 3. Step 1: API Key (The Security Gate)
-with st.expander("🔑 Step 1: Security Access", expanded=True):
-    api_key_input = st.text_input("Paste your Google API Key here to unlock the machine:", type="password")
+    st.markdown("### 🔑 Step 1: Secure Access")
+    api_key_input = st.text_input("Enter your Google API Key:", type="password", placeholder="Paste your key here...")
 
 if api_key_input:
     os.environ["GOOGLE_API_KEY"] = api_key_input
     
-    # 4. Step 2 & 3: Configuration
     st.markdown("---")
+    
+    # 5. Configuration
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("#### 📰 Step 2: Research Topic")
-        topic = st.text_input("What should I research today?", "Artificial Intelligence")
+        st.markdown("### 📰 Step 2: Research")
+        topic = st.text_input("What is your focus today?", "Global Tech Trends")
         
     with col2:
-        st.markdown("#### 🎭 Step 3: Brand Voice")
-        tone = st.selectbox("Select your preferred tone:", 
-                            ["Professional", "Humorous", "Authoritative", "Naija Centric"])
+        st.markdown("### 🎭 Step 3: Voice")
+        tone = st.selectbox("Choose your brand voice:", 
+                            ["Professional", "Authoritative", "Humorous", "Naija Centric"])
 
-    st.markdown("###") # Adds some space
+    st.markdown("  
+", unsafe_allow_html=True)
     
-    # 5. The Action Button
-    if st.button("🚀 GENERATE MY CONTENT STRATEGY"):
-        with st.spinner("🧠 Machine is thinking... researching, fact-checking, and writing."):
+    # 6. Action Button
+    if st.button("🚀 GENERATE STRATEGY"):
+        with st.spinner("Analyzing data and crafting your voice..."):
             final_output = generate_everything(topic, tone)
             
             st.markdown("---")
-            st.markdown("### 📝 Your Strategy & Drafts")
-            # We put the output in a nice "card"
+            st.markdown("### 📝 Strategic Output")
+            # Displaying the output in the premium card
             st.markdown(f'<div class="report-card">{final_output}</div>', unsafe_allow_html=True)
-            
-            st.balloons() # A little celebration!
+            st.balloons()
 else:
-    st.warning("Please enter your API Key above to begin.")
+    st.info("Please provide your API Key to unlock the premium dashboard.")
     st.stop()
