@@ -30,6 +30,7 @@ st.markdown("""
         box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         margin-top: 25px;
         line-height: 1.6;
+        white-space: pre-wrap;
     }
     
     /* The Big Button */
