@@ -5,22 +5,11 @@ from writer_agent import generate_everything
 # 1. Page Configuration
 st.set_page_config(page_title="AI Content Machine Pro", layout="wide")
 
-# 2. Premium Styling (Midnight & Gold)
+# 2. Premium Styling
 st.markdown("""
     <style>
-    /* Main background */
-    .stApp {
-        background-color: #0e1117;
-        color: #ffffff;
-    }
-    
-    /* Custom Font and Headers */
-    h1, h2, h3 {
-        font-family: 'Inter', sans-serif;
-        color: #ffd700 !important;
-    }
-    
-    /* The Content Card */
+    .stApp { background-color: #0e1117; color: #ffffff; }
+    h1, h2, h3 { font-family: 'Inter', sans-serif; color: #ffd700 !important; }
     .report-card {
         background-color: #ffffff;
         color: #1c1e21;
@@ -32,29 +21,15 @@ st.markdown("""
         line-height: 1.6;
         white-space: pre-wrap;
     }
-    
-    /* The Big Button */
     .stButton>button {
         background-color: #ffd700 !important;
         color: #0e1117 !important;
-        border: none !important;
         border-radius: 12px !important;
-        padding: 15px !important;
-        font-size: 18px !important;
         font-weight: bold !important;
-        transition: 0.3s;
     }
-    
-    .stButton>button:hover {
-        background-color: #e6c200 !important;
-        transform: translateY(-2px);
-    }
-
-    /* Input boxes */
     .stTextInput>div>div>input {
         background-color: #1c1e21 !important;
         color: white !important;
-        border: 1px solid #3d444d !important;
         border-radius: 10px !important;
     }
     </style>
@@ -66,38 +41,25 @@ st.markdown("#### *Elevate Your Professional Presence with AI-Powered Strategy*"
 st.divider()
 
 # 4. Step 1: Security Access
-with st.container():
-    st.markdown("### 🔑 Step 1: Secure Access")
-    api_key_input = st.text_input("Enter your Google API Key:", type="password", placeholder="Paste your key here...")
+api_key_input = st.text_input("🔑 Step 1: Enter your Google API Key:", type="password")
 
 if api_key_input:
     os.environ["GOOGLE_API_KEY"] = api_key_input
-    
     st.markdown("---")
     
     # 5. Configuration
     col1, col2 = st.columns(2)
-    
     with col1:
-        st.markdown("### 📰 Step 2: Research")
-        topic = st.text_input("What is your focus today?", "Global Tech Trends")
-        
+        topic = st.text_input("📰 Step 2: Research Topic", "Global Tech Trends")
     with col2:
-        st.markdown("### 🎭 Step 3: Voice")
-        tone = st.selectbox("Choose your brand voice:", 
-                            ["Professional", "Authoritative", "Humorous", "Naija Centric"])
+        tone = st.selectbox("🎭 Step 3: Brand Voice", ["Professional", "Authoritative", "Humorous", "Naija Centric"])
 
-    st.markdown("  
-", unsafe_allow_html=True)
-    
     # 6. Action Button
     if st.button("🚀 GENERATE STRATEGY"):
-        with st.spinner("Analyzing data and crafting your voice..."):
+        with st.spinner("Analyzing data..."):
             final_output = generate_everything(topic, tone)
-            
             st.markdown("---")
             st.markdown("### 📝 Strategic Output")
-            # Displaying the output in the premium card
             st.markdown(f'<div class="report-card">{final_output}</div>', unsafe_allow_html=True)
             st.balloons()
 else:
